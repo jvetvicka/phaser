@@ -9,6 +9,8 @@ var controls = {};
 var playerSpeed = 150;
 var jumpTimer = 0;
 
+var button;
+
 Game.Level1.prototype = { 
     create: function () {
         this.stage.backgroundColor = "#3A5963";
@@ -24,6 +26,10 @@ Game.Level1.prototype = {
         layer.resizeWorld();
         
         map.setCollisionBetween(0, 2);
+        
+        map.setTileIndexCallback(5,this.resetPlayer,this);
+        
+        map.setTileIndexCallback(6,this.getCoin,this);
         
         player = this.add.sprite(100,500,'player');
         player.anchor.setTo(0.5,0.5);
@@ -42,6 +48,14 @@ Game.Level1.prototype = {
             up:this.input.keyboard.addKey(Phaser.Keyboard.W),  
         };
         
+        
+        button = this.add.button(this.world.centerX - 95, this.world.centerY + 200, 'buttons',
+                                 
+                                 function() {
+                                    console.log('pressed');
+                                 },this,2,1,0);
+        
+        button.fixedToCamera = true;
         
         
         
@@ -78,5 +92,31 @@ Game.Level1.prototype = {
         
         
     },
+    
+    
+    resetPlayer:function() {
+        
+        player.reset(100,560)
+        
+    },
+    
+    getCoin:function() {
+        
+        map.putTile(-1,layer.getTileX(player.x), layer.getTileY(player.y));
+         
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

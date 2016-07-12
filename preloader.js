@@ -16,11 +16,13 @@ Game.Preloader.prototype = {
         
         this.load.setPreloadSprite(this.preloadBar);
         
-        this.load.tilemap('map','assets/level1.csv');
+        this.load.tilemap('map','assets/level1.csv?xyz');
         
         this.load.image('tileset','assets/tileset.png');
         
         this.load.spritesheet('player','assets/player.png',24,26);
+        
+        this.load.spritesheet('buttons','assets/buttons.png',193,71)
         
     },
     
